@@ -1,0 +1,26 @@
+! Fonts
+Xft.antialias:                  true
+Xft.hinting:                    true
+Xft.rgba:                       rgb
+Xft.hintstyle:                  hintfull
+Xft.dpi:                        192
+
+! Cursor
+Xcursor.size:                   64
+
+! Xterm
+Xterm*faceName:                 Terminus:size=9:antialias=false
+
+! Urxvt
+URxvt.foreground:               rgba:ffff/ffff/ffff/ffff
+URxvt.background:               rgba:0000/0000/0000/e000
+URxvt.clipboard.copycmd:        xsel -ib
+URxvt.clipboard.pastecmd:       xsel -ob
+URxvt.depth:                    32
+URxvt.font:                     xft:Terminus:size=9
+URxvt.iso14755:                 false
+URxvt.keysym.Shift-Control-C:   perl:clipboard:copy
+URxvt.keysym.Shift-Control-V:   perl:clipboard:paste
+URxvt.perl-ext-common:          default,clipboard
+URxvt.reverseVideo:             false
+URxvt.scrollBar:                false
