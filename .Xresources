@@ -6,21 +6,41 @@ Xft.hintstyle:                  hintfull
 Xft.dpi:                        192
 
 ! Cursor
-Xcursor.size:                   64
+Xcursor.size:                   48
 
 ! Xterm
 Xterm*faceName:                 Terminus:size=9:antialias=false
 
 ! Urxvt
-URxvt.foreground:               rgba:ffff/ffff/ffff/ffff
-URxvt.background:               rgba:0000/0000/0000/e000
-URxvt.clipboard.copycmd:        xsel -ib
-URxvt.clipboard.pastecmd:       xsel -ob
-URxvt.depth:                    32
-URxvt.font:                     xft:Terminus:size=9
-URxvt.iso14755:                 false
-URxvt.keysym.Shift-Control-C:   perl:clipboard:copy
-URxvt.keysym.Shift-Control-V:   perl:clipboard:paste
-URxvt.perl-ext-common:          default,clipboard
-URxvt.reverseVideo:             false
-URxvt.scrollBar:                false
+URxvt*foreground:               rgba:ffff/ffff/ffff/ffff
+URxvt*background:               rgba:0000/0000/0000/e000
+URxvt*clipboard.copycmd:        xsel -ib
+URxvt*clipboard.pastecmd:       xsel -ob
+URxvt*depth:                    32
+URxvt*font:                     xft:Terminus:size=9
+URxvt*iso14755:                 false
+URxvt*keysym.Shift-Control-C:   perl:clipboard:copy
+URxvt*keysym.Shift-Control-V:   perl:clipboard:paste
+URxvt*perl-ext-common:          default,clipboard,matcher
+URxvt*reverseVideo:             false
+URxvt*scrollBar:                false
+URxvt*url-launcher:             /usr/bin/firefox
+URxvt*matcher.button:           1
+URxvt*matcher.rend.0:           Uline Bold fg6
+
+! Rofi
+rofi.font:                      Terminus Bold 18
+rofi.fg:                        #FFFFFF
+rofi.bg:                        #285577
+rofi.fg-active:                 #FFFFFF
+rofi.fg-urgent:                 #FF0000
+rofi.hlfg-active:               #FFFFFF
+rofi.hlfg-urgent:               #FF0000
+rofi.bg-active:                 #FDF6E3
+rofi.bg-urgent:                 #FDF6E3
+rofi.hlbg-active:               #268BD2
+rofi.hlbg-urgent:               #DC322F
+rofi.bgalt:                     #2C597B
+rofi.hlfg:                      #EEE8D5
+rofi.hlbg:                      #4C7899
+rofi.bc:                        #4C7899
