@@ -3,13 +3,13 @@
 " 21/10/2015
 " ---------------------------------------------------------------------------------------
 " 1). Install Vundle:
-"	 $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+"    $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " 2). Install Powerline patched fonts:
-"	 $ git clone https://github.com/powerline/fonts
-"	 $ cd fonts
-"	 $ ./install.sh
+"    $ git clone https://github.com/powerline/fonts
+"    $ cd fonts
+"    $ ./install.sh
 " 3). Launch Vim and pull all the plugins:
-"	 :BundleUpdate
+"    :BundleUpdate
 " ---------------------------------------------------------------------------------------
 
 " Enable Vundle
@@ -35,9 +35,9 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
 if has("mac")
-	Plugin 'Rip-Rip/clang_complete'
-	"Plugin 'gfontenot/vim-xcodebuild'
-	"Plugin 'gilligan/vim-lldb'
+    Plugin 'Rip-Rip/clang_complete'
+    "Plugin 'gfontenot/vim-xcodebuild'
+    "Plugin 'gilligan/vim-lldb'
 endif
 call vundle#end()
 filetype plugin indent on
@@ -49,28 +49,30 @@ hi Search ctermfg=yellow
 hi Search ctermbg=darkred
 
 " Appearance
-set nu							" line numbers
-set rnu							" relative line numbers
-set ls=2						" always show status bar
-set shortmess+=I				" disable splash screen
-syntax enable					" enable syntax highlighting
-set fillchars=vert:│,fold:─		" custom line drawing chars
-set showbreak=↪					" line wrap character
-set updatetime=500				" timeout for cursor hold
-set noshowmode					" hide redundant mode line
-set noeb vb t_vb=				" disable beeping and flashing
+set nu                          " line numbers
+set rnu                         " relative line numbers
+set ls=2                        " always show status bar
+set shortmess+=I                " disable splash screen
+syntax enable                   " enable syntax highlighting
+set fillchars=vert:│,fold:─     " custom line drawing chars
+set showbreak=↪                 " line wrap character
+set updatetime=500              " timeout for cursor hold
+set noshowmode                  " hide redundant mode line
+set noeb vb t_vb=               " disable beeping and flashing
 au GUIEnter * set vb t_vb=
 
 " GUI tweaks
 if has("gui_running")
-	set go-=l go-=L go-=r go-=R		" get rid of scrollbars
-	set go-=T						" get rid of toolbar
-	set lines=40 co=120				" resize window
+    set go-=l go-=L go-=r go-=R     " get rid of scrollbars
+    set go-=T                       " get rid of toolbar
+    set lines=40 co=120             " resize window
 endif
 
 " Tab stops
 set ts=4
+set sts=4
 set sw=4
+set et
 
 " Auto brackets
 ino { {<CR>}<Esc>ko
@@ -97,11 +99,11 @@ set clipboard^=unnamed,unnamedplus
 
 " Enable patched fonts for Airline
 if has("mac")
-	set gfn=Monaco\ for\ Powerline:h11
+    set gfn=Monaco\ for\ Powerline:h11
 elseif has ("unix")
-	set gfn=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
+    set gfn=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
 else
-	" TODO: Windows
+    " TODO: Windows
 endif
 let g:airline_powerline_fonts=1
 
@@ -140,30 +142,30 @@ au FileType nerdtree setlocal nolist
 " Close vim if NERDTree is the only remaining window
 au WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 fun! s:CloseIfOnlyNerdTreeLeft()
-	if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1 && winnr("$") == 1
-		q
-	endif
+    if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1 && winnr("$") == 1
+        q
+    endif
 endfun
 
 " Key bindings for tmux
 if &term =~ '^screen'
-	" tmux will send xterm-style keys when its xterm-keys option is on
-	execute "set <xUp>=\e[1;*A"
-	execute "set <xDown>=\e[1;*B"
-	execute "set <xRight>=\e[1;*C"
-	execute "set <xLeft>=\e[1;*D"
+    " tmux will send xterm-style keys when its xterm-keys option is on
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
 endif
 
-nno <silent> <F2> :set list! list?<CR>			" F2 toggles showing invisibles
-nno <silent> <F3> :NERDTreeToggle<CR>			" F3 toggles NERDTree
-nno <silent> <F4> :TagbarToggle<CR>				" F4 toggles Tagbar
-no  <silent> <F5> :call ToggleGitStatus()<CR>	" F5 toggle: Git status
+nno <silent> <F2> :set list! list?<CR>          " F2 toggles showing invisibles
+nno <silent> <F3> :NERDTreeToggle<CR>           " F3 toggles NERDTree
+nno <silent> <F4> :TagbarToggle<CR>             " F4 toggles Tagbar
+no  <silent> <F5> :call ToggleGitStatus()<CR>   " F5 toggle: Git status
 
 " Unbind the cursor keys(!)
 for prefix in ['i', 'n', 'v']
-	for key in ['<Up>', '<Down>', '<Left>', '<Right>']
-		exe prefix . "no " . key . " <Nop>"
-	endfor
+    for key in ['<Up>', '<Down>', '<Left>', '<Right>']
+        exe prefix . "no " . key . " <Nop>"
+    endfor
 endfor
 
 " Clang completion
@@ -176,8 +178,8 @@ set completeopt=menu,menuone,longest
 let g:SuperTabDefaultCompletionType="context"
 
 " Enable code folding
-set fdm=syntax		" syntax-based folding
-set fdls=2			" files open with code initially unfolded
+set fdm=syntax      " syntax-based folding
+set fdls=2          " files open with code initially unfolded
 let php_folding=1
 let c_folding=1
 let vimsyn_folding='af'
@@ -185,74 +187,74 @@ let vimsyn_folding='af'
 " Nice conditional fold column function from:
 " http://stackoverflow.com/questions/8757168/gvim-automatic-show-foldcolumn-when-there-are-folds-in-a-file
 fun HasFolds()
-	"Attempt to move between folds, checking line numbers to see if it worked.
-	"If it did, there are folds.
-	"
-	if &bt == 'nofile'
-		return
-	endif
+    "Attempt to move between folds, checking line numbers to see if it worked.
+    "If it did, there are folds.
+    "
+    if &bt == 'nofile'
+        return
+    endif
 
-	fun! HasFoldsInner()
-		let origline=line('.')
-		norm zk
-		if origline==line('.')
-			norm zj
-			if origline==line('.')
-				return 0
-			else
-				return 1
-			endif
-		else
-			return 1
-		endif
-		return 0
-	endfun
+    fun! HasFoldsInner()
+        let origline=line('.')
+        norm zk
+        if origline==line('.')
+            norm zj
+            if origline==line('.')
+                return 0
+            else
+                return 1
+            endif
+        else
+            return 1
+        endif
+        return 0
+    endfun
 
-	let l:winview=winsaveview() "save window and cursor position
-	let foldsexist=HasFoldsInner()
-	if foldsexist
-		set foldcolumn=1
-	else
-		"Move to the end of the current fold and check again in case the
-		"cursor was on the sole fold in the file when we checked
-		if line('.')!=1
-			norm [z
-			norm k
-		else
-			norm ]z
-			norm j
-		endif
-		let foldsexist=HasFoldsInner()
-		if foldsexist
-			set foldcolumn=1
-		else
-			set foldcolumn=0
-		endif
-	end
-	call winrestview(l:winview) "restore window/cursor position
+    let l:winview=winsaveview() "save window and cursor position
+    let foldsexist=HasFoldsInner()
+    if foldsexist
+        set foldcolumn=1
+    else
+        "Move to the end of the current fold and check again in case the
+        "cursor was on the sole fold in the file when we checked
+        if line('.')!=1
+            norm [z
+            norm k
+        else
+            norm ]z
+            norm j
+        endif
+        let foldsexist=HasFoldsInner()
+        if foldsexist
+            set foldcolumn=1
+        else
+            set foldcolumn=0
+        endif
+    end
+    call winrestview(l:winview) "restore window/cursor position
 endfun
 
 au CursorHold,BufWinEnter ?* call HasFolds()
 
 fun ToggleGitStatus()
-	if !exists(':Gstatus')
-		return
-	endif
+    if !exists(':Gstatus')
+        return
+    endif
 
-	fun! GitStatusWindowOpen()
-		for n in range(1, winnr('$'))
-			if getwinvar(n, '&pvw') == 1 && getwinvar(n, '&ft') == 'gitcommit'
-				return 1
-			endif
-		endfor
-		return 0
-	endfun
+    fun! GitStatusWindowOpen()
+        for n in range(1, winnr('$'))
+            if getwinvar(n, '&pvw') == 1 && getwinvar(n, '&ft') == 'gitcommit'
+                return 1
+            endif
+        endfor
+        return 0
+    endfun
 
-	if GitStatusWindowOpen()
-		pclo
-	else
-		Gstatus
-	endif
+    if GitStatusWindowOpen()
+        pclo
+    else
+        Gstatus
+    endif
 endfun
 
 " Set shell so we can use bash aliases
