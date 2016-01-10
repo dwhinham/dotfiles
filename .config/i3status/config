@@ -7,6 +7,7 @@
 # If the above line is not correctly displayed, fix your editor first!
 
 general {
+    output_format = "i3bar"
     colors = true
     interval = 5
 }
@@ -23,8 +24,8 @@ order += "battery 0"
 order += "tztime local"
 
 wireless _first_ {
-    format_up = " (%quality at %essid) %ip"
-    format_down = " down"
+    format_up = " (%quality at %essid) %ip"
+    format_down = " down"
 }
 
 ethernet _first_ {
@@ -39,9 +40,9 @@ battery 0 {
     last_full_capacity = true
     low_threshold = "15"
     threshold_type = "percentage"
-    status_chr = ""
-    status_full = ""
-    status_bat = ""
+    status_chr = ""
+    status_full = ""
+    status_bat = ""
 }
 
 tztime local {
@@ -49,12 +50,12 @@ tztime local {
 }
 
 cpu_usage {
-    format = " %usage"
+    format = " %usage"
 }
 
 cpu_temperature 0 {
-	format = " %degrees °C"
-    path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input
+    format = " %degrees °C"
+    path = /sys/class/thermal/thermal_zone1/temp
 }
 
 load {

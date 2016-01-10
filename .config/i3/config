@@ -153,18 +153,18 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    font pango:Font Awesome 8, Terminus Bold 9
-    status_command i3status
+        font pango:Icons, Terminus 8
+        status_command i3status | ~/i3status/i3status-wrapper
 }
 
 # MacBook media keys
 bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && killall -USR1 i3status
 bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && killall -USR1 i3status
 bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && killall -USR1 i3status
-bindsym XF86KbdBrightnessUp   exec --no-startup-id kbd-backlight up
-bindsym XF86KbdBrightnessDown exec --no-startup-id kbd-backlight down
-bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+bindsym XF86KbdBrightnessUp   exec --no-startup-id light -s gmux_backlight -v 3 -A 5
+bindsym XF86KbdBrightnessDown exec --no-startup-id light -s gmux_backlight -v 3 -U 5
+bindsym XF86MonBrightnessUp   exec --no-startup-id light -s gmux_backlight -v 3 -A 5
+bindsym XF86MonBrightnessDown exec --no-startup-id light -s gmux_backlight -v 3 -U 5
 
 # Start compositor
 exec --no-startup-id compton -b

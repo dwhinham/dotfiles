@@ -1,0 +1,20 @@
+#!/bin/env perl
+
+# gpu-status
+# Script which gets the status of vgaswitcheroo and returns
+# either 'IGD' for integrated or 'DIS' for discrete graphics.
+
+# Must be run as root.
+# Copy it to /usr/local/sbin and add the following to /etc/sudoers.d/gpu-status:
+# ALL ALL=NOPASSWD: /usr/local/sbin/gpu-status
+
+use strict;
+use warnings;
+use 5.010;
+
+my $SWITCH_PATH = '/sys/kernel/debug/vgaswitcheroo/switch';
+
+open my $switch, $SWITCH_PATH or die "Unable to open $SWITCH_PATH: $!\n";
+
+my @lines = grep /\+/, <$switch> or die;
+say ((split /:/, $lines[0], 3)[1]);

@@ -1,0 +1,59 @@
+#!/usr/bin/env perl
+# vim:ts=4:sw=4:expandtab
+
+# i3status-wrapper
+# Script to add custom content to i3 status bar.
+
+use utf8;
+use strict;
+use warnings;
+use JSON;
+
+# Don’t buffer any output.
+$| = 1;
+
+# Skip the first line which contains the version header.
+print scalar <STDIN>;
+
+# The second line contains the start of the infinite array.
+print scalar <STDIN>;
+
+# Read lines forever, ignore a comma at the beginning if it exists.
+while (my ($statusline) = (<STDIN> =~ /^,?(.*)/)) {
+    # Decode the JSON-encoded line.
+    my @blocks = @{decode_json($statusline)};
+
+    # Discrete GPU status
+    my %gpu_block = (
+        name => 'GPU Status'
+    );
+
+    # Parsed output of /sys/kernel/debug/vgaswitcheroo/switch
+    # containing either IGD or DIS (integrated/discrete)
+    my $gpu = `sudo -n gpu-status`;
+    chomp $gpu;
+
+    # Status script failed (no sudo rights?) - shown unknown status
+    if ($?) {
+        $gpu_block{color}     = '#FF0000';
+        $gpu_block{full_text} = ' unknown';
+    }
+
+    # Discrete GPU is active
+    elsif ($gpu eq 'DIS') {
+        $gpu_block{color}     = '#FFFF00';
+        $gpu_block{full_text} = ' dGPU';
+    }
+
+    # Integrated GPU is active
+    else {
+        $gpu_block{color}     = '#00FF00';
+        $gpu_block{full_text} = ' iGPU';
+    }
+
+    # Insert the GPU block at position 3
+    splice @blocks, 3, 0, \%gpu_block;
+
+    # Output the line as JSON
+    print encode_json(\@blocks) . ",\n";
+}
