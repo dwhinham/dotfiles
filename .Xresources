@@ -11,9 +11,7 @@ Xcursor.size:                   48
 ! Xterm
 Xterm*faceName:                 Terminus:size=9:antialias=false
 
-! Urxvt
-URxvt*foreground:               rgba:ffff/ffff/ffff/ffff
-URxvt*background:               rgba:0000/0000/0000/e000
+! URxvt
 URxvt*clipboard.copycmd:        xsel -ib
 URxvt*clipboard.pastecmd:       xsel -ob
 URxvt*depth:                    32
@@ -27,6 +25,27 @@ URxvt*scrollBar:                false
 URxvt*url-launcher:             /usr/bin/firefox
 URxvt*matcher.button:           1
 URxvt*matcher.rend.0:           Uline Bold fg6
+URxvt*urgentOnBell:             true
+
+! Molokai theme
+URxvt*foreground:               #d0d0d0
+URxvt*background:               rgba:1000/1000/1000/e000
+URxvt*color0:                   #101010
+URxvt*color1:                   #960050
+URxvt*color2:                   #66aa11
+URxvt*color3:                   #c47f2c
+URxvt*color4:                   #30309b
+URxvt*color5:                   #7e40a5
+URxvt*color6:                   #3579a8
+URxvt*color7:                   #9999aa
+URxvt*color8:                   #303030
+URxvt*color9:                   #ff0090
+URxvt*color10:                  #80ff00
+URxvt*color11:                  #ffba68
+URxvt*color12:                  #5f5fee
+URxvt*color13:                  #bb88dd
+URxvt*color14:                  #4eb4fa
+URxvt*color15:                  #d0d0d0
 
 ! Rofi
 rofi.font:                      Terminus Bold 18
