@@ -1,6 +1,6 @@
 " ---------------------------------------------------------------------------------------
 " Dale's custom Vim config
-" 21/10/2015
+" 16/01/2016
 " ---------------------------------------------------------------------------------------
 " 1). Install Vundle:
 "    $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -165,7 +165,7 @@ let g:SuperTabDefaultCompletionType="context"
 
 " Enable code folding
 set fdm=syntax      " syntax-based folding
-set fdls=2          " files open with code initially unfolded
+set fdls=20         " files open with code initially unfolded
 let php_folding=1
 let c_folding=1
 let vimsyn_folding='af'
