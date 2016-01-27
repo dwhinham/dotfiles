@@ -1,6 +1,6 @@
 " ---------------------------------------------------------------------------------------
 " Dale's custom Vim config
-" 16/01/2016
+" 27/01/2016
 " ---------------------------------------------------------------------------------------
 " 1). Install Vundle:
 "    $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -17,22 +17,24 @@ set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'guns/xterm-color-table.vim'
+Plugin 'jiangmiao/auto-pairs'
 Plugin 'majutsushi/tagbar'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'rdnetto/YCM-Generator'
 Plugin 'samsaga2/vim-z80'
 Plugin 'scrooloose/nerdtree'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tomasr/molokai'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
 call vundle#end()
@@ -65,10 +67,10 @@ if has("gui_running")
 endif
 
 " Tab stops
+set et
 set ts=4
 set sts=4
 set sw=4
-set et
 
 " Mouse support
 set mouse=a
