@@ -87,7 +87,7 @@ au VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234 ctermfg=240 guibg=#1c
 au VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235 ctermfg=240 guibg=#262626 guifg=#303030
 
 " Whitespace highlighting
-set list lcs=tab:▸·,trail:·,eol:¬ "¶
+set list lcs=space:·,tab:▸·,trail:·,eol:¬ "¶
 
 " Use system clipboard
 set clipboard^=unnamed,unnamedplus
