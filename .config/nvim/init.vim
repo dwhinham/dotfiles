@@ -23,7 +23,6 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'bling/vim-airline'
 Plugin 'guns/xterm-color-table.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'majutsushi/tagbar'
@@ -37,6 +36,8 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tomasr/molokai'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
 call vundle#end()
@@ -82,8 +83,8 @@ let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_guide_size=1
 let g:indent_guides_exclude_filetypes=['help', 'nerdtree']
 let g:indent_guides_auto_colors=0
-au VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234 ctermfg=236 guibg=#1c1c1c guifg=#303030
-au VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235 ctermfg=236 guibg=#262626 guifg=#303030
+au VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234 ctermfg=240 guibg=#1c1c1c guifg=#303030
+au VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235 ctermfg=240 guibg=#262626 guifg=#303030
 
 " Whitespace highlighting
 set list lcs=tab:▸·,trail:·,eol:¬ "¶
