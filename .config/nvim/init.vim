@@ -1,6 +1,6 @@
 " ---------------------------------------------------------------------------------------
 " Dale's custom Vim config
-" 27/01/2016
+" 02/02/2016
 " ---------------------------------------------------------------------------------------
 " 1). Install Vundle:
 "    $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -44,12 +44,6 @@ Plugin 'xolox/vim-misc'
 call vundle#end()
 filetype plugin indent on
 
-" Apply colorscheme
-color molokai
-set hlsearch
-hi Search ctermfg=yellow
-hi Search ctermbg=darkred
-
 " Appearance
 set nu                          " line numbers
 set rnu                         " relative line numbers
@@ -63,6 +57,12 @@ set nosmd                       " hide redundant mode line
 set noeb vb t_vb=               " disable beeping and flashing
 au GUIEnter * set vb t_vb=
 
+" Apply colorscheme
+color molokai
+set hlsearch
+hi Normal ctermbg=none
+hi Search ctermfg=235 ctermbg=121
+
 " GUI tweaks
 if has("gui_running")
     set go-=l go-=L go-=r go-=R     " get rid of scrollbars
@@ -71,10 +71,7 @@ if has("gui_running")
 endif
 
 " Tab stops
-set et
-set ts=4
-set sts=4
-set sw=4
+set et ts=4 sts=4 sw=4
 
 " Mouse support
 set mouse=a
@@ -155,7 +152,7 @@ endif
 nno <silent> <F2> :set list! list?<CR>          " F2 toggles showing invisibles
 nno <silent> <F3> :NERDTreeToggle<CR>           " F3 toggles NERDTree
 nno <silent> <F4> :TagbarToggle<CR>             " F4 toggles Tagbar
-no  <silent> <F5> :call ToggleGitStatus()<CR>   " F5 toggle: Git status
+no  <silent> <F5> :call ToggleGitStatus()<CR>   " F5 toggles Git status
 
 " Unbind the cursor keys(!)
 for prefix in ['i', 'n', 'v']
@@ -164,11 +161,9 @@ for prefix in ['i', 'n', 'v']
     endfor
 endfor
 
+" YouCompleteMe
 set completeopt=menu,menuone,longest
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-
-" SuperTab options
-let g:SuperTabDefaultCompletionType="context"
 
 " Enable code folding
 set fdm=syntax      " syntax-based folding
@@ -252,4 +247,4 @@ endfun
 
 " Set shell so we can use bash aliases
 set shell=/bin/bash
-let $BASH_ENV = "~/.bash_aliases"
+let $BASH_ENV="~/.bash_aliases"
