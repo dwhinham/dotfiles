@@ -43,6 +43,7 @@ Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
 call vundle#end()
 filetype plugin indent on
+au FileType vundle set nolist
 
 " Appearance
 set nu                          " line numbers
@@ -73,13 +74,18 @@ endif
 " Tab stops
 set et ts=4 sts=4 sw=4
 
+" Use <C-L> to clear the highlighting of search results
+if maparg('<C-L>', 'n') ==# ''
+    nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+endif
+
 " Mouse support
 set mouse=a
 
 " Indent guides
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_guide_size=1
-let g:indent_guides_exclude_filetypes=['help', 'nerdtree']
+let g:indent_guides_exclude_filetypes=['help', 'vundle', 'nerdtree']
 let g:indent_guides_auto_colors=0
 au VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234 ctermfg=240 guibg=#1c1c1c guifg=#303030
 au VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235 ctermfg=240 guibg=#262626 guifg=#303030
@@ -88,7 +94,7 @@ au VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235 ctermfg=240 guibg=#26
 set list lcs=space:·,tab:▸·,trail:·,eol:¬ "¶
 
 " Use system clipboard
-set clipboard^=unnamed,unnamedplus
+set clipboard+=unnamedplus
 
 " Enable patched fonts for Airline
 if has("mac")
@@ -245,6 +251,8 @@ fun ToggleGitStatus()
     endif
 endfun
 
-" Set shell so we can use bash aliases
-set shell=/bin/bash
-let $BASH_ENV="~/.bash_aliases"
+" Set shell to bash if launched from fish
+if &shell =~# 'fish$' || &shell =~# 'tcsh$'
+    set shell=/bin/bash
+    let $BASH_ENV="~/.bash_aliases"
+endif
