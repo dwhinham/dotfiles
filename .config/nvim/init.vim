@@ -1,51 +1,52 @@
 " ---------------------------------------------------------------------------------------
 " Dale's custom Vim config
-" 02/02/2016
+" 24/03/2016
 " ---------------------------------------------------------------------------------------
-" 1). Install Vundle:
-"    $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" 1). Install vim-plug:
+"    $ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 " 2). Install Powerline patched fonts:
 "    $ git clone https://github.com/powerline/fonts
 "    $ cd fonts
 "    $ ./install.sh
 " 3). Launch Vim and pull all the plugins:
-"    :BundleUpdate
+"    :PlugInstall
 " ---------------------------------------------------------------------------------------
 
-" Enable Vundle
-if !has("nvim")
-    set nocompatible
-endif
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'guns/xterm-color-table.vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'majutsushi/tagbar'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'rdnetto/YCM-Generator'
-Plugin 'samsaga2/vim-z80'
-Plugin 'scrooloose/nerdtree'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tomasr/molokai'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'xolox/vim-easytags'
-Plugin 'xolox/vim-misc'
-call vundle#end()
-filetype plugin indent on
-au FileType vundle set nolist
+" Post-install hook to build YouCompleteMe
+fun! BuildYCM(info)
+    if a:info.status == 'installed' || a:info.force
+        !./install.py --clang-completer
+    endif
+endfun
 
-" Appearance
+" Enable Plug
+call plug#begin()
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'airblade/vim-gitgutter'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'guns/xterm-color-table.vim'
+Plug 'jceb/vim-orgmode'
+Plug 'jiangmiao/auto-pairs'
+Plug 'majutsushi/tagbar'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+Plug 'samsaga2/vim-z80'
+Plug 'scrooloose/nerdtree'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'justinmk/molokai'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+"Plug 'xolox/vim-easytags'
+"Plug 'xolox/vim-misc'
+call plug#end()
+
+" General settings
 set nu                          " line numbers
 set rnu                         " relative line numbers
 set ls=2                        " always show status bar
@@ -53,10 +54,11 @@ set shortmess+=I                " disable splash screen
 syntax enable                   " enable syntax highlighting
 set fillchars=vert:│,fold:─     " custom line drawing chars
 set showbreak=↪                 " line wrap character
+let mapleader='\'               " leader key
+set tm=500                      " timeout for key sequence to complete
 set updatetime=500              " timeout for cursor hold
 set nosmd                       " hide redundant mode line
-set noeb vb t_vb=               " disable beeping and flashing
-au GUIEnter * set vb t_vb=
+set noeb vb                     " disable beeping and flashing
 
 " Apply colorscheme
 color molokai
@@ -108,7 +110,6 @@ endif
 let g:airline_powerline_fonts=1
 
 " Airline
-set tm=50
 let g:airline_theme='badwolf'
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#fnamemod=':t'
