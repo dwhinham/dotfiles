@@ -13,6 +13,18 @@
 "    :PlugInstall
 " ------------------------------------------------------------------------------
 
+" Platform-specific paths
+if has("mac")
+    let s:LIBCLANG_PATH='/usr/local/opt/llvm/lib/libclang.dylib'
+    let s:CLANG_HEADER_PATH='/usr/local/opt/llvm/lib/clang'
+    let s:CLANG_FORMAT_PATH='/usr/local/bin/clang-format'
+else
+    let s:LIBCLANG_PATH='/usr/lib/x86_64-linux-gnu/libclang-3.6.so.1'
+    let s:CLANG_HEADER_PATH='/usr/lib/clang'
+    let s:CLANG_FORMAT_PATH='/usr/bin/clang-format-3.6'
+'
+endif
+
 " Enable Plug
 call plug#begin()
 Plug 'ARM9/arm-syntax-vim'
@@ -205,8 +217,8 @@ vnoremap <s-tab> <gv
 " ------------------------------------------------------------------------------
 let g:deoplete#enable_at_startup=1
 let g:deoplete#max_menu_width=1000
-let g:deoplete#sources#clang#libclang_path='/usr/lib/x86_64-linux-gnu/libclang-3.6.so.1'
-let g:deoplete#sources#clang#clang_header='/usr/lib/clang'
+let g:deoplete#sources#clang#libclang_path=s:LIBCLANG_PATH
+let g:deoplete#sources#clang#clang_header=s:CLANG_HEADER_PATH
 
 " Tab-completion
 inoremap <silent><expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
@@ -218,7 +230,7 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " ------------------------------------------------------------------------------
 "  clang_complete
 " ------------------------------------------------------------------------------
-let g:clang_library_path='/usr/lib/x86_64-linux-gnu/libclang-3.6.so.1'
+let g:clang_library_path=s:LIBCLANG_PATH
 
 " ------------------------------------------------------------------------------
 "  Syntastic
@@ -236,7 +248,8 @@ let g:syntastic_c_config_file='.clang_complete'
 " ------------------------------------------------------------------------------
 "  clang-format
 " ------------------------------------------------------------------------------
-let g:clang_format#command='/usr/bin/clang-format-3.6'
+let g:clang_format#command=s:CLANG_FORMAT_PATH
+
 
 " Enable code folding
 set fdls=20                         " files open with code initially unfolded
