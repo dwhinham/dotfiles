@@ -1,6 +1,6 @@
 " ------------------------------------------------------------------------------
 " Dale's custom Vim config
-" 13/04/2016
+" 23/07/2016
 " ------------------------------------------------------------------------------
 " 1). Install vim-plug:
 "    $ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -22,42 +22,33 @@ else
     let s:LIBCLANG_PATH='/usr/lib/x86_64-linux-gnu/libclang-3.6.so.1'
     let s:CLANG_HEADER_PATH='/usr/lib/clang'
     let s:CLANG_FORMAT_PATH='/usr/bin/clang-format-3.6'
-'
 endif
 
 " Enable Plug
 call plug#begin()
-Plug 'ARM9/arm-syntax-vim'
-Plug 'Konfekt/FastFold'
-Plug 'Rip-Rip/clang_complete'
-Plug 'Shougo/deoplete.nvim'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'Konfekt/FastFold'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
-Plug 'c9s/perlomni.vim'
-Plug 'critiqjo/lldb.nvim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'guns/xterm-color-table.vim'
-Plug 'jceb/vim-orgmode'
+" Plug 'jceb/vim-orgmode'
 Plug 'jiangmiao/auto-pairs'
+Plug 'jalcine/cmake.vim'
 Plug 'justinmk/molokai'
-Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'racer-rust/vim-racer'
 Plug 'rhysd/vim-clang-format'
 Plug 'rust-lang/rust.vim'
-Plug 'samsaga2/vim-z80'
-Plug 'scottferg/armasm.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'zchee/deoplete-jedi'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 call plug#end()
 
 " General settings
@@ -78,7 +69,7 @@ set hid                         " hide buffers
 set so=5                        " 5-line scrolloff
 set tw=80                       " 80 column limit
 au BufWinEnter * set cc=+1      " text width marker
-set cot=menu                    " disable preview in completeopts
+"set cot=menu                    " disable preview in completeopts
 
 " Apply colorscheme
 color molokai
@@ -105,6 +96,18 @@ endif
 
 " Tab stops
 set et ts=4 sts=4 sw=4
+
+" Tab and Shift-Tab indent
+vnoremap <tab>   >gv
+vnoremap <s-tab> <gv
+
+" Enable code folding
+set fdls=20                         " files open with code initially unfolded
+let g:tex_fold_enabled=1
+let g:vimsyn_folding='af'
+let g:xml_syntax_folding=1
+let g:php_folding=1
+let g:perl_fold=1
 
 " Use <c-l> to clear the highlighting of search results
 nnoremap <silent> <c-l> :nohlsearch<cr><c-l>
@@ -169,95 +172,82 @@ nmap <leader>g :Grepper<cr>
 " ------------------------------------------------------------------------------
 "  NERDTree
 " ------------------------------------------------------------------------------
-let NERDTreeMinimalUI=1
-let NERDTreeMouseMode=2
-let NERDTreeShowBookmarks=1
-let NERDTreeShowHidden=1
-let g:NERDTreeDirArrowExpandable='▶'
-let g:NERDTreeDirArrowCollapsible='▼'
-au FileType nerdtree setlocal nolist
-
-" Close vim if NERDTree is the only remaining window
-au WinEnter * call s:CloseIfOnlyNerdTreeLeft()
-fun! s:CloseIfOnlyNerdTreeLeft()
-    if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1
-                \ && winnr("$") == 1
-        q
-    endif
-endfun
-
-" Key bindings for tmux
-if &term =~ '^screen'
-    " tmux will send xterm-style keys when its xterm-keys option is on
-    exe "set <xUp>=\e[1;*A"
-    exe "set <xDown>=\e[1;*B"
-    exe "set <xRight>=\e[1;*C"
-    exe "set <xLeft>=\e[1;*D"
-endif
-
-nno <silent> <f2> :set list! list?<cr>          " F2 toggles showing invisibles
-nno <silent> <f3> :NERDTreeToggle<cr>           " F3 toggles NERDTree
-nno <silent> <f4> :TagbarToggle<cr>             " F4 toggles Tagbar
-no  <silent> <f5> :SyntasticCheck<cr>           " F5 runs Syntastic
-no  <silent> <f6> :call ToggleGitStatus()<cr>   " F6 toggles Git status
-
-" Unbind the cursor keys(!)
-for prefix in ['i', 'n', 'v']
-    for key in ['<Up>', '<Down>', '<Left>', '<Right>']
-        exe prefix . "no " . key . " <Nop>"
-    endfor
-endfor
-
-" Tab and Shift-Tab indent
-vnoremap <tab>   >gv
-vnoremap <s-tab> <gv
+" let NERDTreeMinimalUI=1
+" let NERDTreeMouseMode=2
+" let NERDTreeShowBookmarks=1
+" let NERDTreeShowHidden=1
+" let g:NERDTreeDirArrowExpandable='▶'
+" let g:NERDTreeDirArrowCollapsible='▼'
+" au FileType nerdtree setlocal nolist
+" 
+" " Close vim if NERDTree is the only remaining window
+" au WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+" fun! s:CloseIfOnlyNerdTreeLeft()
+"     if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1
+"                 \ && winnr("$") == 1
+"         q
+"     endif
+" endfun
+" 
+" " Key bindings for tmux
+" if &term =~ '^screen'
+"     " tmux will send xterm-style keys when its xterm-keys option is on
+"     exe "set <xUp>=\e[1;*A"
+"     exe "set <xDown>=\e[1;*B"
+"     exe "set <xRight>=\e[1;*C"
+"     exe "set <xLeft>=\e[1;*D"
+" endif
+" 
+" nno <silent> <f2> :set list! list?<cr>          " F2 toggles showing invisibles
+" nno <silent> <f3> :NERDTreeToggle<cr>           " F3 toggles NERDTree
+" nno <silent> <f4> :TagbarToggle<cr>             " F4 toggles Tagbar
+" no  <silent> <f5> :SyntasticCheck<cr>           " F5 runs Syntastic
+" no  <silent> <f6> :call ToggleGitStatus()<cr>   " F6 toggles Git status
 
 " ------------------------------------------------------------------------------
 "  deoplete
 " ------------------------------------------------------------------------------
-let g:deoplete#enable_at_startup=1
-let g:deoplete#max_menu_width=1000
-let g:deoplete#sources#clang#libclang_path=s:LIBCLANG_PATH
-let g:deoplete#sources#clang#clang_header=s:CLANG_HEADER_PATH
-
-" Tab-completion
-inoremap <silent><expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
-inoremap <silent><expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-
-" Hide popup when leaving insert mode
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" let g:deoplete#enable_at_startup=1
+" let g:deoplete#max_menu_width=1000
+" let g:deoplete#sources#clang#libclang_path=s:LIBCLANG_PATH
+" let g:deoplete#sources#clang#clang_header=s:CLANG_HEADER_PATH
+" 
+" " Tab-completion
+" inoremap <silent><expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
+" inoremap <silent><expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+" 
+" " Hide popup when leaving insert mode
+" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " ------------------------------------------------------------------------------
 "  clang_complete
 " ------------------------------------------------------------------------------
-let g:clang_library_path=s:LIBCLANG_PATH
+" let g:clang_library_path=s:LIBCLANG_PATH
 
 " ------------------------------------------------------------------------------
 "  Syntastic
 " ------------------------------------------------------------------------------
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" 
+" let g:syntastic_always_populate_loc_list=1
+" let g:syntastic_auto_loc_list=1
+" let g:syntastic_check_on_open=1
+" let g:syntastic_check_on_wq=0
+" let g:syntastic_c_config_file='.clang_complete'
 
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_check_on_open=1
-let g:syntastic_check_on_wq=0
-let g:syntastic_c_config_file='.clang_complete'
+" ------------------------------------------------------------------------------
+"  YouCompleteMe
+" ------------------------------------------------------------------------------
+let g:ycm_confirm_extra_conf=0
+let g:ycm_autoclose_preview_window_after_completion=1
+map <c-]> :YcmCompleter GoTo<cr>
 
 " ------------------------------------------------------------------------------
 "  clang-format
 " ------------------------------------------------------------------------------
-let g:clang_format#command=s:CLANG_FORMAT_PATH
-
-
-" Enable code folding
-set fdls=20                         " files open with code initially unfolded
-let g:tex_fold_enabled=1
-let g:vimsyn_folding='af'
-let g:xml_syntax_folding=1
-let g:php_folding=1
-let g:perl_fold=1
+"let g:clang_format#command=s:CLANG_FORMAT_PATH
 
 " Function for toggling Gstatus window
 fun ToggleGitStatus()
@@ -286,8 +276,3 @@ if &shell =~# 'fish$' || &shell =~# 'tcsh$'
     set shell=/bin/bash
     let $BASH_ENV="~/.bash_aliases"
 endif
-
-" Enable ARM ASM syntax highlighting
-let asmsyntax='armasm'
-let filetype_inc='armasm'
-au BufNewFile,BufRead *.s,*.S if @% =~? "gcc" | set filetype=arm | endif
