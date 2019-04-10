@@ -1,11 +1,21 @@
 config:
   backup: true
+  banner: true
   create: true
   dotpath: dotfiles
-  banner: true
-  longkey: false
+  ignoreempty: false
   keepdot: false
-  link_import_default: nolink
+  link_by_default: false
   link_dotfile_default: nolink
+  link_import_default: nolink
+  longkey: false
+  showdiff: false
+  workdir: ~/.config/dotdrop
 dotfiles:
+  f_init.vim:
+    dst: ~/.config/nvim/init.vim
+    src: config/nvim/init.vim
 profiles:
+  x230:
+    dotfiles:
+    - f_init.vim
