@@ -16,11 +16,9 @@
 ;
 ;==========================================================
 
-foo = #220000 
-
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #cc222222
+background = #222
 background-alt = #444
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
@@ -32,7 +30,12 @@ alert = #bd2c40
 [bar/bar1]
 monitor = ${env:MONITOR}
 width = 100%
+{%@@ if hidpi @@%}
+dpi = 144
+height = 48
+{%@@ else @@%}
 height = 24
+{%@@ endif @@%}
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0
@@ -53,13 +56,17 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = xos4 Terminus:pixelsize=10;1
-font-1 = Unifont:size=8:antialias=false;0
-font-2 = Wuncon Siji:pixelsize=10;1
+font-0 = ubuntu mono:size=12;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=10;1
 
 modules-left = i3
-modules-center = mpd
+;modules-center = mpd
+{%@@ if profile == "x230" @@%}
 modules-right = filesystem pulseaudio memory cpu wlan eth battery temperature date xkeyboard powermenu
+{%@@ else @@%}
+modules-right = filesystem pulseaudio memory cpu eth date xkeyboard powermenu
+{%@@ endif @@%}
 
 tray-position = right
 tray-padding = 2
@@ -88,7 +95,6 @@ label = %title:0:30:...%
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-#format = <label-indicator>
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-prefix-underline = ${colors.secondary}
@@ -175,29 +181,18 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 type = internal/mpd
 format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
 
-# icon-prev = 
-# icon-seekb = 
-# icon-stop = 
-# icon-play = 
-# icon-pause = 
-# icon-next = 
-# icon-seekf = 
-
 icon-prev = 
 icon-stop = 
 icon-play = 
 icon-pause = 
 icon-next = 
 
-icon-random = 
-icon-repeat = 
-
-label-song-maxlen = 50
+label-song-maxlen = 25
 label-song-ellipsis = true
 
 [module/xbacklight]
 type = internal/xbacklight
-card = acpi_video0
+
 format = <label> <bar>
 label = BL
 
@@ -212,9 +207,10 @@ bar-empty = ─
 bar-empty-font = 2
 bar-empty-foreground = ${colors.foreground-alt}
 
-#[module/backlight-acpi]
-#inherit = module/xbacklight
-#type = internal/backlight
+[module/backlight-acpi]
+inherit = module/xbacklight
+type = internal/backlight
+card = intel_backlight
 
 [module/cpu]
 type = internal/cpu
@@ -256,7 +252,11 @@ ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
+{%@@ if profile == "x230" @@%}
 interface = enp0s25
+{%@@ else @@%}
+interface = enp6s0
+{%@@ endif @@%}
 interval = 3.0
 
 format-connected-underline = #55aa55
@@ -356,10 +356,6 @@ format-discharging-underline = ${self.format-charging-underline}
 format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
-
-label-charging = %percentage%% %time%
-label-discharging = %percentage%% %time%, %consumption%W
-time-format = %-Hh%Mm
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
