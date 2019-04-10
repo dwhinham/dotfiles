@@ -38,6 +38,9 @@ dotfiles:
   f_polybar_config:
     dst: ~/.config/polybar/config
     src: config/polybar/config
+  f_xresources:
+    dst: ~/.Xresources
+    src: Xresources
 profiles:
   stroggii:
     dotfiles:
