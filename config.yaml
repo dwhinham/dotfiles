@@ -3,8 +3,10 @@ actions:
     vim-plug-install: test -e ~/.config/nvim/autoload/plug.vim || (mkdir -p ~/.config/nvim/autoload;
       curl -fLo ~/.config/nvim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim)
   vim-plug: nvim +PlugInstall +qall
+variables:
+  kblayout: gb
 config:
-  backup: true
+  backup: false
   banner: true
   create: true
   dotpath: dotfiles
@@ -14,7 +16,7 @@ config:
   link_dotfile_default: nolink
   link_import_default: nolink
   longkey: false
-  showdiff: false
+  showdiff: true
   workdir: ~/.config/dotdrop
 dotfiles:
   f_alacritty.yml:
@@ -45,6 +47,9 @@ profiles:
   stroggii:
     dotfiles:
     - ALL
+    variables:
+      hidpi: true
+      kblayout: us
   x230:
     dotfiles:
     - ALL

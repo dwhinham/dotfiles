@@ -1,13 +1,13 @@
+{%@@ if hidpi @@%}
+! HiDPI
+*.dpi:                          192
+{%@@ endif @@%}
+
 ! Fonts
 Xft.antialias:                  true
 Xft.hinting:                    true
 Xft.rgba:                       rgb
 Xft.hintstyle:                  hintfull
-
-{%@@ if profile == "stroggii" @@%}
-! HiDPI
-Xft.dpi:                        192
-{%@@ endif @@%}
 
 ! Xterm
 Xterm*faceName:                 xos4 Terminus:size=8:antialias=false

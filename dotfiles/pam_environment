@@ -7,4 +7,7 @@ MANPAGER=most
 PAGER=most
 QT_QPA_PLATFORMTHEME=qt5ct
 TERMINAL=alacritty
-XKB_DEFAULT_LAYOUT=gb
+XKB_DEFAULT_LAYOUT={{@@ kblayout @@}}
+{%@@ if hidpi @@%}
+WINIT_HIDPI_FACTOR=4
+{%@@ endif @@%}
