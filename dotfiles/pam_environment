@@ -1,0 +1,10 @@
+BROWSER=chromium
+EDITOR=nvim
+FZF_CTRL_T_COMMAND="rg --files --no-messages --no-ignore --hidden --follow -g \"!{.git,node_modules}/*\" \$dir"
+FZF_CTRL_T_OPTS="--height 80% --preview 'coderay {} 2>/dev/null; or hexdump {} 2>/dev/null'"
+FZF_DEFAULT_COMMAND="rg --files --no-messages --no-ignore --hidden --follow -g \"!{.git,node_modules}/*\" \$dir"
+MANPAGER=most
+PAGER=most
+QT_QPA_PLATFORMTHEME=qt5ct
+TERMINAL=alacritty
+XKB_DEFAULT_LAYOUT=gb

@@ -26,6 +26,9 @@ dotfiles:
     - vim-plug
     dst: ~/.config/nvim/init.vim
     src: config/nvim/init.vim
+  f_pam_environment:
+    dst: ~/.pam_environment
+    src: pam_environment
 profiles:
   stroggii:
     dotfiles:
