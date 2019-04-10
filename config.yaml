@@ -3,8 +3,6 @@ actions:
     vim-plug-install: test -e ~/.config/nvim/autoload/plug.vim || (mkdir -p ~/.config/nvim/autoload;
       curl -fLo ~/.config/nvim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim)
   vim-plug: nvim +PlugInstall +qall
-variables:
-  kblayout: gb
 config:
   backup: false
   banner: true
@@ -19,12 +17,18 @@ config:
   showdiff: true
   workdir: ~/.config/dotdrop
 dotfiles:
+  f_a_night_to_come_back.png:
+    dst: ~/wallpapers/a_night_to_come_back.png
+    src: wallpapers/a_night_to_come_back.png
   f_alacritty.yml:
     dst: ~/.config/alacritty/alacritty.yml
     src: config/alacritty/alacritty.yml
   f_config:
     dst: ~/.config/i3/config
     src: config/i3/config
+  f_fehbg:
+    dst: ~/.fehbg
+    src: fehbg
   f_init.vim:
     actions:
     - vim-plug-install
@@ -53,3 +57,5 @@ profiles:
   x230:
     dotfiles:
     - ALL
+variables:
+  kblayout: gb
