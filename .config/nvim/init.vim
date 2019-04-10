@@ -28,7 +28,7 @@ endif
 call plug#begin()
 " Plug 'Konfekt/FastFold'
 " Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'guns/xterm-color-table.vim'
 " Plug 'jceb/vim-orgmode'
@@ -45,10 +45,11 @@ Plug 'rust-lang/rust.vim'
 " Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang' }
 call plug#end()
 
 " General settings
@@ -68,6 +69,7 @@ set noeb vb                     " disable beeping and flashing
 set hid                         " hide buffers
 set so=5                        " 5-line scrolloff
 set tw=80                       " 80 column limit
+set nowrap
 au BufWinEnter * set cc=+1      " text width marker
 "set cot=menu                    " disable preview in completeopts
 
@@ -95,7 +97,7 @@ if has("gui_running")
 endif
 
 " Tab stops
-set et ts=4 sts=4 sw=4
+set noet ts=4 sts=4 sw=4
 
 " Tab and Shift-Tab indent
 vnoremap <tab>   >gv
@@ -179,7 +181,7 @@ nmap <leader>g :Grepper<cr>
 " let g:NERDTreeDirArrowExpandable='▶'
 " let g:NERDTreeDirArrowCollapsible='▼'
 " au FileType nerdtree setlocal nolist
-" 
+"
 " " Close vim if NERDTree is the only remaining window
 " au WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 " fun! s:CloseIfOnlyNerdTreeLeft()
@@ -188,7 +190,7 @@ nmap <leader>g :Grepper<cr>
 "         q
 "     endif
 " endfun
-" 
+"
 " " Key bindings for tmux
 " if &term =~ '^screen'
 "     " tmux will send xterm-style keys when its xterm-keys option is on
@@ -197,7 +199,7 @@ nmap <leader>g :Grepper<cr>
 "     exe "set <xRight>=\e[1;*C"
 "     exe "set <xLeft>=\e[1;*D"
 " endif
-" 
+"
 " nno <silent> <f2> :set list! list?<cr>          " F2 toggles showing invisibles
 " nno <silent> <f3> :NERDTreeToggle<cr>           " F3 toggles NERDTree
 " nno <silent> <f4> :TagbarToggle<cr>             " F4 toggles Tagbar
@@ -211,11 +213,11 @@ nmap <leader>g :Grepper<cr>
 " let g:deoplete#max_menu_width=1000
 " let g:deoplete#sources#clang#libclang_path=s:LIBCLANG_PATH
 " let g:deoplete#sources#clang#clang_header=s:CLANG_HEADER_PATH
-" 
+"
 " " Tab-completion
 " inoremap <silent><expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
 " inoremap <silent><expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-" 
+"
 " " Hide popup when leaving insert mode
 " autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
@@ -230,7 +232,7 @@ nmap <leader>g :Grepper<cr>
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
-" 
+"
 " let g:syntastic_always_populate_loc_list=1
 " let g:syntastic_auto_loc_list=1
 " let g:syntastic_check_on_open=1

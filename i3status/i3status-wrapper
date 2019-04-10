@@ -46,37 +46,6 @@ while ((my $statusline) = (<STDIN> =~ /^,?(.*)/)) {
     # Decode the JSON-encoded line.
     my @blocks = @{decode_json($statusline)};
 
-    # Discrete GPU status
-    my %gpu_block = (
-        name => 'gpu_status'
-    );
-
-    # Parsed output of /sys/kernel/debug/vgaswitcheroo/switch
-    # containing either IGD or DIS (integrated/discrete)
-    my $gpu = `sudo -n gpu-status`;
-    chomp $gpu;
-
-    # Status script failed (no sudo rights?) - shown unknown status
-    if ($?) {
-        $gpu_block{color}     = '#FF0000';
-        $gpu_block{full_text} = ' unknown';
-    }
-
-    # Discrete GPU is active
-    elsif ($gpu eq 'DIS') {
-        $gpu_block{color}     = '#FFFF00';
-        $gpu_block{full_text} = ' dGPU';
-    }
-
-    # Integrated GPU is active
-    else {
-        $gpu_block{color}     = '#00FF00';
-        $gpu_block{full_text} = ' iGPU';
-    }
-
-    # Insert the GPU block at position 3
-    splice @blocks, 3, 0, \%gpu_block;
-
     # Battery energy consumption
     my %energy_block = (
         name  => 'energy',

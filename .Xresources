@@ -9,20 +9,21 @@ Xft.dpi:                        192
 Xcursor.size:                   48
 
 ! Xterm
-Xterm*faceName:                 Terminus:size=9:antialias=false
+Xterm*faceName:                 xos4 Terminus:size=12:antialias=false, \
+                                Noto Color Emoji:style=Regular
 
 ! URxvt
 URxvt*clipboard.copycmd:        xsel -ib
 URxvt*clipboard.pastecmd:       xsel -ob
 URxvt*depth:                    32
-URxvt*font:                     xft:Terminus:size=9
+URxvt*font:                     xft:xos4 Terminus:size=12,xft:DejaVu Sans
 URxvt*iso14755:                 false
 URxvt*keysym.Shift-Control-C:   perl:clipboard:copy
 URxvt*keysym.Shift-Control-V:   perl:clipboard:paste
 URxvt*perl-ext-common:          default,clipboard,matcher
 URxvt*reverseVideo:             false
 URxvt*scrollBar:                false
-URxvt*url-launcher:             /usr/bin/firefox
+URxvt*url-launcher:             /usr/bin/chromium
 URxvt*matcher.button:           1
 URxvt*matcher.rend.0:           Uline Bold fg6
 URxvt*urgentOnBell:             true
@@ -48,18 +49,6 @@ URxvt*color14:                  #4eb4fa
 URxvt*color15:                  #d0d0d0
 
 ! Rofi
-rofi.font:                      Terminus Bold 18
-rofi.fg:                        #FFFFFF
-rofi.bg:                        #285577
-rofi.fg-active:                 #FFFFFF
-rofi.fg-urgent:                 #FF0000
-rofi.hlfg-active:               #FFFFFF
-rofi.hlfg-urgent:               #FF0000
-rofi.bg-active:                 #FDF6E3
-rofi.bg-urgent:                 #FDF6E3
-rofi.hlbg-active:               #268BD2
-rofi.hlbg-urgent:               #DC322F
-rofi.bgalt:                     #2C597B
-rofi.hlfg:                      #EEE8D5
-rofi.hlbg:                      #4C7899
-rofi.bc:                        #4C7899
+rofi.dpi:                       192
+rofi.font:                      xos4 Terminus Bold 12
+rofi.theme:                     Adapta-Nokto
