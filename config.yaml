@@ -29,9 +29,15 @@ dotfiles:
     - vim-plug
     dst: ~/.config/nvim/init.vim
     src: config/nvim/init.vim
+  f_launch.sh:
+    dst: ~/.config/polybar/launch.sh
+    src: config/polybar/launch.sh
   f_pam_environment:
     dst: ~/.pam_environment
     src: pam_environment
+  f_polybar_config:
+    dst: ~/.config/polybar/config
+    src: config/polybar/config
 profiles:
   stroggii:
     dotfiles:
