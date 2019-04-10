@@ -9,5 +9,5 @@ QT_QPA_PLATFORMTHEME=qt5ct
 TERMINAL=alacritty
 XKB_DEFAULT_LAYOUT={{@@ kblayout @@}}
 {%@@ if hidpi @@%}
-WINIT_HIDPI_FACTOR=4
+WINIT_HIDPI_FACTOR=1.5
 {%@@ endif @@%}

@@ -1,6 +1,6 @@
 {%@@ if hidpi @@%}
 ! HiDPI
-*.dpi:                          192
+*.dpi:                          144
 {%@@ endif @@%}
 
 ! Fonts
