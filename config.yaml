@@ -20,6 +20,9 @@ dotfiles:
   f_alacritty.yml:
     dst: ~/.config/alacritty/alacritty.yml
     src: config/alacritty/alacritty.yml
+  f_config:
+    dst: ~/.config/i3/config
+    src: config/i3/config
   f_init.vim:
     actions:
     - vim-plug-install
