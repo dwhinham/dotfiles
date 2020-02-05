@@ -1,34 +1,36 @@
 "less Packages
 call plug#begin()
+"Plug 'shougo/neoinclude.vim'
+"Plug 'shougo/neosnippet-snippets'
+"Plug 'shougo/neosnippet.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'editorconfig/editorconfig-vim'
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 Plug 'iamcco/mathjax-support-for-mkdp'
-Plug 'jalvesaq/Nvim-R'
-Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
 Plug 'lilydjwg/colorizer'
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
-"Plug 'racer-rust/vim-racer'
 Plug 'rust-lang/rust.vim'
-"Plug 'shougo/deoplete-clangx'
 Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'shougo/neosnippet-snippets'
-Plug 'shougo/neosnippet.vim'
-Plug 'shougo/neoinclude.vim'
+Plug 'shougo/echodoc.vim'
 Plug 'tell-k/vim-autopep8'
 Plug 'tpope/vim-fugitive'
-Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
 Plug 'yggdroot/indentline'
+Plug 'yuezk/vim-js'
 Plug 'zchee/deoplete-jedi'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 call plug#end()
 
 " Color scheme
 set background=dark
-colorscheme gruvbox
+colorscheme dracula
 "hi Normal guibg=NONE ctermbg=NONE
 
 " Misc settings
@@ -44,7 +46,7 @@ set ts=2
 set sw=2
 set hid
 
-set spell spelllang=en_gb
+set spelllang=en_gb
 
 " Airline
 let g:airline_powerline_fonts=1
@@ -76,7 +78,6 @@ inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 
 " Deoplete
 let g:deoplete#enable_at_startup=1
-let g:racer_experimental_completer=1
 set completeopt-=preview
 inoremap <silent><expr> <TAB>
 			\ pumvisible() ? "\<C-n>" :
@@ -88,13 +89,28 @@ function! s:check_back_space() abort "{{{
 	return !col || getline('.')[col - 1]  =~ '\s'
 endfunction"}}}
 
+" Echodoc
+let g:echodoc#enable_at_startup=1
 
+" LanguageClient
+let g:LanguageClient_windowLogMessageLevel='Error'
 let g:LanguageClient_serverCommands = {
-  \ 'rust': ['rustup', 'run', 'stable', 'rls'],
   \ 'c': ['ccls'],
   \ 'cpp': ['ccls'],
+  \ 'javascript': ['javascript-typescript-stdio'],
+  \ 'typescript': ['javascript-typescript-stdio'],
+  \ 'typescriptreact': ['javascript-typescript-stdio'],
+  \ 'rust': ['rustup', 'run', 'stable', 'rls'],
   \ }
 
+let g:LanguageClient_rootMarkers = {
+  \ 'javascript': ['jsconfig.json'],
+  \ 'typescript': ['tsconfig.json'],
+  \ }
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 if exists('+termguicolors')
 	let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
@@ -106,3 +122,6 @@ endif
 let g:mkdp_markdown_css = "/home/dale/node_modules/github-markdown-css/github-markdown.css"
 let g:mkdp_browser = 'vimb'
 let g:mkdp_auto_start = 1
+
+" <Ctrl-l> redraws the screen and removes any search highlighting
+nnoremap <silent> <C-l> :nohl<CR><C-l>

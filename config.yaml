@@ -10,20 +10,19 @@ config:
   dotpath: dotfiles
   ignoreempty: false
   keepdot: false
-  link_by_default: false
-  link_dotfile_default: nolink
-  link_import_default: nolink
+  link_dotfile_default: link
+  link_on_import: link
   longkey: false
   showdiff: true
   workdir: ~/.config/dotdrop
 dotfiles:
-  f_a_night_to_come_back.png:
-    dst: ~/wallpapers/a_night_to_come_back.png
-    src: wallpapers/a_night_to_come_back.png
+  f_wallpaper:
+    dst: ~/wallpapers/wallpaper.png
+    src: wallpapers/wallpaper.png
   f_alacritty.yml:
     dst: ~/.config/alacritty/alacritty.yml
     src: config/alacritty/alacritty.yml
-  f_config:
+  f_i3config:
     dst: ~/.config/i3/config
     src: config/i3/config
   f_fehbg:
@@ -47,15 +46,37 @@ dotfiles:
   f_xresources:
     dst: ~/.Xresources
     src: Xresources
+  f_config.rasi:
+    src: config/rofi/config.rasi
+    dst: ~/.config/rofi/config.rasi
+  d_autorandr:
+    src: config/autorandr
+    dst: ~/.config/autorandr
 profiles:
   stroggii:
     dotfiles:
     - ALL
     variables:
+      has_gaps: true
+      has_polybar: true
       hidpi: true
       kblayout: us
   x230:
     dotfiles:
     - ALL
+    variables:
+      has_gaps: true
+      has_polybar: true
+  precision7540:
+    dotfiles:
+    - f_alacritty.yml
+    - f_config.rasi
+    - f_fehbg
+    - f_i3config
+    - f_init.vim
+    - f_wallpaper
+    - d_autorandr
+    variables:
+      kblayout: jp
 variables:
   kblayout: gb

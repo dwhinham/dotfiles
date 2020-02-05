@@ -1,0 +1,8 @@
+configuration {
+	width: 75;
+	lines: 30;
+	columns: 3;
+	font: "UbuntuMono Nerd Font 12";
+	show-icons: true;
+	theme: "Arc-Dark";
+}
