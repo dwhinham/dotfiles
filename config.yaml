@@ -2,6 +2,7 @@ actions:
   pre:
     vim-plug-install: test -e ~/.config/nvim/autoload/plug.vim || (mkdir -p ~/.config/nvim/autoload;
       curl -fLo ~/.config/nvim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim)
+  tpm: git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && tmux -c ~/.tmux/plugins/tpm/bin/install_plugins
   vim-plug: nvim +PlugInstall +qall
 config:
   backup: false
@@ -52,6 +53,11 @@ dotfiles:
   d_autorandr:
     src: config/autorandr
     dst: ~/.config/autorandr
+  f_tmux.conf:
+    src: tmux.conf
+    dst: ~/.tmux.conf
+    actions:
+    - tpm
 profiles:
   stroggii:
     dotfiles:
@@ -69,13 +75,14 @@ profiles:
       has_polybar: true
   precision7540:
     dotfiles:
+    - d_autorandr
     - f_alacritty.yml
     - f_config.rasi
     - f_fehbg
     - f_i3config
     - f_init.vim
+    - f_tmux.conf
     - f_wallpaper
-    - d_autorandr
     variables:
       kblayout: jp
 variables:
