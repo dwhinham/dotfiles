@@ -30,12 +30,7 @@ alert = #bd2c40
 [bar/bar1]
 monitor = ${env:MONITOR}
 width = 100%
-{%@@ if hidpi @@%}
-dpi = 144
-height = 48
-{%@@ else @@%}
 height = 24
-{%@@ endif @@%}
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0
@@ -56,17 +51,13 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = ubuntu mono:size=12;1
+font-0 = ubuntu:size=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
 modules-left = i3
 ;modules-center = mpd
-{%@@ if profile == "x230" @@%}
 modules-right = filesystem pulseaudio memory cpu wlan eth battery temperature date xkeyboard powermenu
-{%@@ else @@%}
-modules-right = filesystem pulseaudio memory cpu eth date xkeyboard powermenu
-{%@@ endif @@%}
 
 tray-position = right
 tray-padding = 2
@@ -252,11 +243,7 @@ ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
-{%@@ if profile == "x230" @@%}
-interface = enp0s25
-{%@@ else @@%}
-interface = enp6s0
-{%@@ endif @@%}
+interface = eno0
 interval = 3.0
 
 format-connected-underline = #55aa55
