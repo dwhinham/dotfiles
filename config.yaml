@@ -2,7 +2,8 @@ actions:
   pre:
     vim-plug-install: test -e ~/.config/nvim/autoload/plug.vim || (mkdir -p ~/.config/nvim/autoload;
       curl -fLo ~/.config/nvim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim)
-  tpm: git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && tmux -c ~/.tmux/plugins/tpm/bin/install_plugins
+  tpm: git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && tmux -c
+    ~/.tmux/plugins/tpm/bin/install_plugins
   vim-plug: nvim +PlugInstall +qall
 config:
   backup: false
@@ -58,6 +59,9 @@ dotfiles:
     dst: ~/.tmux.conf
     actions:
     - tpm
+  f_yarnrc:
+    src: yarnrc
+    dst: ~/.yarnrc
 profiles:
   stroggii:
     dotfiles:
@@ -83,6 +87,7 @@ profiles:
     - f_init.vim
     - f_tmux.conf
     - f_wallpaper
+    - f_yarnrc
     variables:
       kblayout: jp
 variables:
