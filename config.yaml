@@ -65,6 +65,9 @@ dotfiles:
   f_yarnrc:
     src: yarnrc
     dst: ~/.yarnrc
+  d_cava:
+    src: config/cava
+    dst: ~/.config/cava
 profiles:
   stroggii:
     dotfiles:
@@ -94,6 +97,7 @@ profiles:
     - f_tmux.conf
     - f_wallpaper
     - f_yarnrc
+    - d_cava
     variables:
       ethernet: eno1
       wifi: wlp111s0
