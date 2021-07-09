@@ -159,8 +159,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-{%@@ if profile == "x230" @@%}
-# X230 key bindings
+# Laptop key bindings
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5%
 bindsym XF86AudioMute exec pactl set-sink-mute $(pacmd list-sinks |awk '/* index:/{print $3}') toggle
@@ -171,8 +170,9 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 5
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
-bindsym XF86Launch1 exec chromium
-{%@@ endif @@%}
+bindsym XF86Launch1 exec firefox
+
+bindsym --release $mod+End exec i3lock -c 222222
 
 # Gaps/borders
 {%@@ if has_gaps == true @@%}
@@ -206,7 +206,7 @@ client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
 client.urgent           $red $red $white $red $red
 
 # Press both shifts to toggle keyboard layout
-exec --no-startup-id setxkbmap -option grp:shifts_toggle -layout gb,us,ro -variant ,,std
+exec --no-startup-id setxkbmap -option grp:shifts_toggle -layout gb,us,jp
 
 {%@@ if profile == "precision7540" @@%}
 # Workspace monitor priorities
@@ -233,7 +233,7 @@ bar {
 
 exec_always --no-startup-id autorandr -c
 exec_always --no-startup-id ~/.fehbg
-exec --no-startup-id compton
+exec --no-startup-id picom
 exec --no-startup-id redshift-gtk
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id udiskie -s -f ~/.config/i3/launch-mc.sh -q

@@ -99,7 +99,7 @@
 # Font configuration (changes require restart)
 font:
   normal:
-    family: UbuntuMono Nerd Font
+    family: Iosevka Nerd Font
   # Normal (roman) font face
   #normal:
     # Font family
@@ -111,7 +111,7 @@ font:
     #family: monospace
 
     # The `style` can be specified to pick a specific face.
-    #style: Regular
+    style: Light
 
   # Bold font face
   #bold:
@@ -181,41 +181,62 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-# BEGIN ACE
-colors:
-  primary:
-    background: '0x151515'
-    foreground: '0xe0e1e0'
-  cursor:
-    text:       '0x151515'
-    cursor:     '0xe0e1e0'
-  normal:
-    black:      '0x151515'
-    red:        '0x56926B'
-    green:      '0xBC318F'
-    yellow:     '0xF31996'
-    blue:       '0x61DFAB'
-    magenta:    '0x41D2CB'
-    cyan:       '0x9EA7A1'
-    white:      '0xe0e1e0'
-  bright:
-    black:      '0x9c9d9c'
-    red:        '0x56926B'
-    green:      '0xBC318F'
-    yellow:     '0xF31996'
-    blue:       '0x61DFAB'
-    magenta:    '0x41D2CB'
-    cyan:       '0x9EA7A1'
-    white:      '0xe0e1e0'
-# END ACE
+schemes:
+  ace: &ace
+    primary:
+      background: '#151515'
+      foreground: '#e0e1e0'
+    cursor:
+      text:       '#151515'
+      cursor:     '#e0e1e0'
+    normal:
+      black:      '#151515'
+      red:        '#56926b'
+      green:      '#bc318f'
+      yellow:     '#f31996'
+      blue:       '#61dfab'
+      magenta:    '#41d2cb'
+      cyan:       '#9ea7a1'
+      white:      '#e0e1e0'
+    bright:
+      black:      '#9c9d9c'
+      red:        '#56926b'
+      green:      '#bc318f'
+      yellow:     '#f31996'
+      blue:       '#61dfab'
+      magenta:    '#41d2cb'
+      cyan:       '#9ea7a1'
+      white:      '#e0e1e0'
 
-    # Bright and dim foreground colors
-    #
-    # The dimmed foreground color is calculated automatically if it is not present.
-    # If the bright foreground color is not set, or `draw_bold_text_with_bright_colors`
-    # is `false`, the normal foreground color will be used.
-    #dim_foreground: '0x9a9a9a'
-    #bright_foreground: '0xffffff'
+  dracula: &dracula
+    # Default colors
+    primary:
+      background: '#282a36'
+      foreground: '#f8f8f2'
+
+    # Normal colors
+    normal:
+      black:   '#000000'
+      red:     '#ff5555'
+      green:   '#50fa7b'
+      yellow:  '#f1fa8c'
+      blue:    '#caa9fa'
+      magenta: '#ff79c6'
+      cyan:    '#8be9fd'
+      white:   '#bfbfbf'
+
+    # Bright colors
+    bright:
+      black:   '#575b70'
+      red:     '#ff6e67'
+      green:   '#5af78e'
+      yellow:  '#f4f99d'
+      blue:    '#caa9fa'
+      magenta: '#ff92d0'
+      cyan:    '#9aedfe'
+      white:   '#e6e6e6'
+
+colors: *dracula
 
   # Cursor colors
   #
@@ -310,7 +331,7 @@ colors:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.95
+background_opacity: 0.9
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"

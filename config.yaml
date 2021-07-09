@@ -54,6 +54,9 @@ dotfiles:
   d_autorandr:
     src: config/autorandr
     dst: ~/.config/autorandr
+  d_picom:
+    src: config/picom
+    dst: ~/.config/picom
   f_tmux.conf:
     src: tmux.conf
     dst: ~/.tmux.conf
@@ -68,7 +71,6 @@ profiles:
     - ALL
     variables:
       has_gaps: true
-      has_polybar: true
       hidpi: true
       kblayout: us
   x230:
@@ -76,19 +78,26 @@ profiles:
     - ALL
     variables:
       has_gaps: true
-      has_polybar: true
+      ethernet: eno0
+      wifi: wlp2s0
   precision7540:
     dotfiles:
     - d_autorandr
+    - d_picom
     - f_alacritty.yml
     - f_config.rasi
     - f_fehbg
     - f_i3config
     - f_init.vim
+    - f_launch.sh
+    - f_polybar_config
     - f_tmux.conf
     - f_wallpaper
     - f_yarnrc
     variables:
-      kblayout: jp
+      ethernet: eno1
+      wifi: wlp111s0
 variables:
   kblayout: gb
+  has_gaps: false
+  has_polybar: true
